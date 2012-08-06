@@ -1,0 +1,3 @@
+Build it with maven using mvn package
+
+then copy fakeRudder/target/fake-rudder-web-Version.war to Vagrant/fakeRudder

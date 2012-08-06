@@ -1,0 +1,147 @@
+Rudder: configuration management for the masses
+----------------------------------------------
+
+This project is part of Rudder - configuration management for the masses.
+ 
+See: http://rudder-project.org for more information. 
+
+[horizontal]
+Screenshots:: http://www.rudder-project.org/foswiki/Screenshots/WebHome
+User documentation:: http://www.rudder-project.org/rudder-doc/rudder-doc.html
+Bug report:: http://www.rudder-project.org/redmine/projects/rudder/issues
+Mailing list, irc:: http://www.rudder-project.org/foswiki/Community/
+
+=== Authors
+
+Normation http://normation.com
+
+- François "fanf42" Armand francois.armand@normation.com
+- Nicolas "ncharles" Charles nicolas.charles@normation.com
+- Vincent "VinceMacBuche" Membré vincent.membre@normation.com
+
+=== License
+
+This project is licensed under GPLv3 license, 
+see the provided "LICENSE" file or 
+http://www.gnu.org/licenses/gpl-3.0.txt
+
+=== Contributing
+
+Thank you for your interest in our project!
+The contribution process is detailed here: 
+http://www.rudder-project.org/HowToContribute
+
+=== Synopsis
+
+This git repository contains a Vagrant (http://www.vagrantup.com) configuration, enabling
+the user to launch from scratch a developing Rudder environment.
+
+With it, you can modify and contribute to Rudder more easily.
+
+=== Requirements
+
+There are two dependencies: VirtualBox and Vagrant.
+
+The former may be installed using your favorite package management system, and the latter
+using RubyGems.
+
+See the complete installation instructions here:
+
+* VirtualBox: https://www.virtualbox.org/wiki/Downloads
+* Vagrant: http://vagrantup.com/docs/getting-started/index.html
+
+To set up your environment you also need prerequisites (less Virtual machines) from:
+
+* http://www.rudder-project.org/foswiki/Development/SettingUpADevelopmentEnvironment
+
+=== Usage
+
+To have a stable and working environment for Rudder, you need first to set up your local machine.
+In fact, some files will be shared beetween your server Rudder virtual machine and your local machine.
+You also need to have configurations files fitted with the vm
+Then at last you can finally run your vm
+
+==== Setting up files on your local machine
+
+You need to create some files to share with your server VM
+
+
+* share
+
+A directory containing generated promises for your nodes
+
+mkdir -p /var/rudder/share
+
+* inputs
+
+A directory containing initial promises for Rudder server
+
+mkdir -p /var/rudder/cfengine-community/inputs
+
+and you should set its content by copying content of initial-promises/node-server
+from project rudder-techniques
+
+cp -a /path/to/rudder-techniques/initial-promises/node-server/* /var/rudder/cfengine-community/inputs
+
+* configuration-repository
+
+A repository containing techniques/directives/groups for your server
+
+mkdir -p /var/rudder/configuration-repository
+ 
+and you should set its content by copying directory techniques from project rudder-techniques
+
+cp -a /path/to/rudder-techniques/techniques /var/rudder/configuration-repository/
+
+then in /var/rudder/configuration-repository
+
+git init
+
+git add techniques
+
+git commit -m "initial commit with techniques"
+
+the other directories will be generated when launching the web-app
+
+==== Starting the VM
+
+Before starting your vm you have to build the fakeRudder.war
+
+go info directory fakeRudder, use mvn package
+
+cp fakeRudder/target/fake-rudder-web-VERSION.war Vagrant/fakeRudder/
+
+When everything is done then you can start your VM by using the command vagrant up
+but you have to launch your own rudder webapp.
+
+==== Launching the webapp
+
+* Configuration File
+
+We provide you a configuration file fited for that vm configuration (ldap and psql have to look for another port)
+
+* launch option
+
+to launch Rudder webapp in Eclipse you should create a run configuration for rudder-web
+
+* Go to menu Run->Run Configurations... 
+* Create a new Jetty-Webapp with target project rudder-web
+* Set port to 8080
+* Switch to  tabs "Arguments"
+* Add "-Drudder.configFile=/path/to/rudder-vagrant-dev/config/configuration.properties" to Vm Arguments. 
+* Apply
+* Run that configuration
+
+The webapp starts!
+
+Go to http://localhost:8080/rudder-web/ to access it
+
+
+==== FAQ
+
+* My webapp can't start becaus eche can't read a file, what can I do ??
+
+First you have to look if the corresponding file exists.
+If so, look if you own it or not.
+Change the owner to yourself if not.
+
