@@ -145,3 +145,9 @@ First you have to look if the corresponding file exists.
 If so, look if you own it or not.
 Change the owner to yourself if not.
 
+
+* I can't build a 64 bits virtual machines, how can i change to 32 bits one ?
+
+in file Vagrant/Vagrantfile  "config.vm.box = "debian-squeeze-64"" to  "config.vm.box = "debian-squeeze-32""
+and "config.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/Squeeze64.box"" to "config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box""
+
