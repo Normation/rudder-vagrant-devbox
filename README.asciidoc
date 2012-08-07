@@ -70,46 +70,53 @@ You need to create some files to share with your server VM
 
 A directory containing generated promises for your nodes
 
-mkdir -p /var/rudder/share
+[source,shell]
+$ mkdir -p /var/rudder/share
 
 * inputs
 
 A directory containing initial promises for Rudder server
 
-mkdir -p /var/rudder/cfengine-community/inputs
+[source,shell]
+$ mkdir -p /var/rudder/cfengine-community/inputs
 
-and you should set its content by copying content of initial-promises/node-server
+and you should set its content by copying content of +${rudder-techniques}/initial-promises/node-server+
 from project rudder-techniques
 
-cp -a /path/to/rudder-techniques/initial-promises/node-server/* /var/rudder/cfengine-community/inputs
+[source,shell]
+$ cp -a /path/to/rudder-techniques/initial-promises/node-server/* /var/rudder/cfengine-community/inputs
 
 * configuration-repository
 
-A repository containing techniques/directives/groups for your server
+A repository containing Techniques/Directives/Groups for your server
 
-mkdir -p /var/rudder/configuration-repository
+[source,shell]
+$ mkdir -p /var/rudder/configuration-repository
  
 and you should set its content by copying directory techniques from project rudder-techniques
 
+[source,shell]
 cp -a /path/to/rudder-techniques/techniques /var/rudder/configuration-repository/
 
-then in /var/rudder/configuration-repository
+then in +/var/rudder/configuration-repository+
 
-git init
-
-git add techniques
-
-git commit -m "initial commit with techniques"
+[source,shell]
+----
+$ git init
+$ git add techniques
+$ git commit -m "initial commit with techniques"
+----
 
 the other directories will be generated when launching the web-app
 
 ==== Starting the VM
 
-Before starting your vm you have to build the fakeRudder.war
+Before starting your vm you have to build the +fakeRudder.war+
 
-go info directory fakeRudder, use mvn package
+go info directory +fakeRudder+, use +mvn package+
 
-cp fakeRudder/target/fake-rudder-web-VERSION.war Vagrant/fakeRudder/
+[source,shell]
+$ cp fakeRudder/target/fake-rudder-web-VERSION.war Vagrant/fakeRudder/
 
 When everything is done then you can start your VM by using the command vagrant up
 but you have to launch your own rudder webapp.
@@ -118,36 +125,37 @@ but you have to launch your own rudder webapp.
 
 * Configuration File
 
-We provide you a configuration file fited for that vm configuration (ldap and psql have to look for another port)
+We provide to you a configuration file fitted for that VM configuration (LDAP and PostgresSQL does not use the default ports)
 
 * launch option
 
-to launch Rudder webapp in Eclipse you should create a run configuration for rudder-web
+To launch Rudder webapp in Eclipse you should create a run configuration for rudder-web
 
 * Go to menu Run->Run Configurations... 
-* Create a new Jetty-Webapp with target project rudder-web
-* Set port to 8080
+* Create a new Jetty-Webapp with target project *rudder-web*
+* Set port to *8080*
 * Switch to  tabs "Arguments"
-* Add "-Drudder.configFile=/path/to/rudder-vagrant-dev/config/configuration.properties" to Vm Arguments. 
+* Add "-Drudder.configFile=/path/to/rudder-vagrant-dev/config/configuration.properties" to VM Arguments. 
 * Apply
 * Run that configuration
 
 The webapp starts!
 
-Go to http://localhost:8080/rudder-web/ to access it
+Go to *http://localhost:8080/rudder-web/* to access it
 
 
 ==== FAQ
 
-* My webapp can't start becaus eche can't read a file, what can I do ??
-
+.My webapp can't start becaus eche can't read a file, what can I do ?
+==============
 First you have to look if the corresponding file exists.
 If so, look if you own it or not.
 Change the owner to yourself if not.
+==============
 
-
-* I can't build a 64 bits virtual machines, how can i change to 32 bits one ?
-
-in file Vagrant/Vagrantfile  "config.vm.box = "debian-squeeze-64"" to  "config.vm.box = "debian-squeeze-32""
-and "config.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/Squeeze64.box"" to "config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box""
+.I can't build a 64 bits virtual machines, how can i change to 32 bits one ?
+==============
+In file ${rudder-vagrant-devbox}/Vagrant/Vagrantfile, change  +config.vm.box = "debian-squeeze-64"+ to  +config.vm.box = "debian-squeeze-32"+
+and +config.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/Squeeze64.box"+ to +config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box"+
+==============
 
