@@ -70,42 +70,34 @@ You need to create some files to share with your server VM
 
 A directory containing generated promises for your nodes
 
-[source]
-$ mkdir -p /var/rudder/share
++$ mkdir -p /var/rudder/share+
 
 * inputs
 
 A directory containing initial promises for Rudder server
 
-[source]
-$ mkdir -p /var/rudder/cfengine-community/inputs
++$ mkdir -p /var/rudder/cfengine-community/inputs+
 
 and you should set its content by copying content of +${rudder-techniques}/initial-promises/node-server+
 from project rudder-techniques
 
-[source]
-$ cp -a /path/to/rudder-techniques/initial-promises/node-server/* /var/rudder/cfengine-community/inputs
++$ cp -a /path/to/rudder-techniques/initial-promises/node-server/* /var/rudder/cfengine-community/inputs+
 
 * configuration-repository
 
 A repository containing Techniques/Directives/Groups for your server
 
-[source]
-$ mkdir -p /var/rudder/configuration-repository
++$ mkdir -p /var/rudder/configuration-repository+
  
 and you should set its content by copying directory techniques from project rudder-techniques
 
-[source]
-cp -a /path/to/rudder-techniques/techniques /var/rudder/configuration-repository/
++cp -a /path/to/rudder-techniques/techniques /var/rudder/configuration-repository/+
 
 then in +/var/rudder/configuration-repository+
 
-[source]
-----
-$ git init
-$ git add techniques
-$ git commit -m "initial commit with techniques"
-----
++$ git init+
++$ git add techniques+
++$ git commit -m "initial commit with techniques"+
 
 the other directories will be generated when launching the web-app
 
@@ -115,8 +107,7 @@ Before starting your vm you have to build the +fakeRudder.war+
 
 go info directory +fakeRudder+, use +mvn package+
 
-[source]
-$ cp fakeRudder/target/fake-rudder-web-VERSION.war Vagrant/fakeRudder/
++$ cp fakeRudder/target/fake-rudder-web-VERSION.war Vagrant/fakeRudder/+
 
 When everything is done then you can start your VM by using the command vagrant up
 but you have to launch your own rudder webapp.
