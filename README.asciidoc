@@ -97,7 +97,9 @@ then in +/var/rudder/configuration-repository+
 
 ----
 $ git init
+
 $ git add techniques
+
 $ git commit -m "initial commit with techniques"
 ----
 
