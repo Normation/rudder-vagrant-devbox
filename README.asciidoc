@@ -108,11 +108,15 @@ The other directories will be generated when launching the web-app.
 
 Before starting your vm you have to build the +fakeRudder.war+
 
-go info directory +fakeRudder+, use +mvn package+
+go info directory +rudder-vagrant-devbox/fakeRudder+, and build the project with:
 
-+$ cp fakeRudder/target/fake-rudder-web-VERSION.war Vagrant/fakeRudder/+
++$ cd rudder-vagrant-devbox/fakeRudder+
 
-When everything is done then you can start your VM by using the command vagrant up
++$ mvn package+
+
++$ cp target/fake-rudder-web-VERSION.war ../Vagrant/fakeRudder/+
+
+When everything is done, you can start your VM by using the command vagrant up
 but you have to launch your own rudder webapp.
 
 ==== Launching the webapp

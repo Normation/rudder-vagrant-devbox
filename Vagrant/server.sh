@@ -82,10 +82,13 @@ sed -i s%^base\.url\=.*%base\.url\=http\:\/\/localhost\:8080\/rudder% /opt/rudde
 
 #we don't want to launch the Rudder Web app, only the endpoint
 #so we replace the real Rudder with our fake one, available on share file
-#/etc/init.d/jetty stop 
+#we also have to adapt JVM memory to conform to what the VM has
+/etc/init.d/jetty stop 
+sed -i -e "s/-Xms1024m -Xmx1024m/-Xms350m -Xmx350m/" /etc/default/jetty
+sed -i -e "s/-XX:PermSize=128m -XX:MaxPermSize=256m/-XX:PermSize=70m -XX:MaxPermSize=70m/" /etc/default/jetty
 rm /opt/rudder/jetty7/webapps/rudder.war 
 cp /vagrant/fakeRudder/fake-rudder-web-2.4.0-SNAPSHOT.war /opt/rudder/jetty7/webapps/rudder.war
-#/etc/init.d/jetty start
+/etc/init.d/jetty start
 
 #we want to make sure that people don't look for the bad 
 #configuration-repository - the one used is on the host
@@ -113,3 +116,4 @@ sed -i "s/\(RUDDER_OPENLDAP_BIND_PASSWORD:\).*/\1secret/" /opt/rudder/etc/rudder
 /var/rudder/cfengine-community/bin/cf-agent
 
 echo "Rudder server install: FINISHED" |tee /tmp/rudder.log
+
