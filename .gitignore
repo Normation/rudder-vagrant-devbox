@@ -1,1 +1,3 @@
 *.war
+*/.vagrant
+*/target/*
