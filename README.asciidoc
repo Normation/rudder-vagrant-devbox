@@ -95,13 +95,12 @@ and you should set its content by copying directory techniques from project rudd
 
 then in +/var/rudder/configuration-repository+
 
-----
-$ git init
++$ git init+
 
-$ git add techniques
++$ git add techniques+
 
-$ git commit -m "initial commit with techniques"
-----
++$ git commit -m "initial commit with techniques"+
+
 
 The other directories will be generated when launching the web-app.
 
