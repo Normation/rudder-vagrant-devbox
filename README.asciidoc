@@ -70,37 +70,37 @@ You need to create some files to share with your server VM
 
 A directory containing generated promises for your nodes
 
-[source,shell]
+[source]
 $ mkdir -p /var/rudder/share
 
 * inputs
 
 A directory containing initial promises for Rudder server
 
-[source,shell]
+[source]
 $ mkdir -p /var/rudder/cfengine-community/inputs
 
 and you should set its content by copying content of +${rudder-techniques}/initial-promises/node-server+
 from project rudder-techniques
 
-[source,shell]
+[source]
 $ cp -a /path/to/rudder-techniques/initial-promises/node-server/* /var/rudder/cfengine-community/inputs
 
 * configuration-repository
 
 A repository containing Techniques/Directives/Groups for your server
 
-[source,shell]
+[source]
 $ mkdir -p /var/rudder/configuration-repository
  
 and you should set its content by copying directory techniques from project rudder-techniques
 
-[source,shell]
+[source]
 cp -a /path/to/rudder-techniques/techniques /var/rudder/configuration-repository/
 
 then in +/var/rudder/configuration-repository+
 
-[source,shell]
+[source]
 ----
 $ git init
 $ git add techniques
@@ -115,7 +115,7 @@ Before starting your vm you have to build the +fakeRudder.war+
 
 go info directory +fakeRudder+, use +mvn package+
 
-[source,shell]
+[source]
 $ cp fakeRudder/target/fake-rudder-web-VERSION.war Vagrant/fakeRudder/
 
 When everything is done then you can start your VM by using the command vagrant up
@@ -146,16 +146,14 @@ Go to *http://localhost:8080/rudder-web/* to access it
 
 ==== FAQ
 
-.My webapp can't start becaus eche can't read a file, what can I do ?
-==============
+===== My webapp can't start becaus eche can't read a file, what can I do ?
+
 First you have to look if the corresponding file exists.
 If so, look if you own it or not.
 Change the owner to yourself if not.
-==============
 
-.I can't build a 64 bits virtual machines, how can i change to 32 bits one ?
-==============
+===== I can't build a 64 bits virtual machines, how can i change to 32 bits one ?
+
 In file ${rudder-vagrant-devbox}/Vagrant/Vagrantfile, change  +config.vm.box = "debian-squeeze-64"+ to  +config.vm.box = "debian-squeeze-32"+
 and +config.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/Squeeze64.box"+ to +config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box"+
-==============
 
