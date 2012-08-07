@@ -148,6 +148,18 @@ Change the owner to yourself if not.
 
 ===== I can't build or use a 64 bits VM, how can I change to 32 bits one ?
 
-In file +rudder-vagrant-devbox/Vagrant/Vagrantfile+, change  +config.vm.box = "debian-squeeze-64"+ to  +config.vm.box = "debian-squeeze-32"+
-and +config.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/Squeeze64.box"+ to +config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box"+
+In file +rudder-vagrant-devbox/Vagrant/Vagrantfile+, change:
+
+  +config.vm.box = "debian-squeeze-64"+ to +config.vm.box = "debian-squeeze-32"+
+
+and choose another Debian Squeeze 32 bits Box from *http://www.vagrantbox.es/* and change the +config.vm.box_url+ parameter to the new value, (for example):
+
++config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box"+
+
+===== I get a "Please verify that the box exists and is accessible" error message just after the "vagrant up" command
+
+Perhaps the Debain Squeeze Box Image we choose to use is no more available, or not available at the moment - most of these image are on cloud storage, so depending of the weather, things may break :)
+
+Just go to *http://www.vagrantbox.es/* and choose an other Debian Squeeze 64bits images from the list, and then use it for the +config.vm.box_url+ in rudder-vagrant-devbox/Vagrant/VagrantFile.
+
 
