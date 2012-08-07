@@ -66,24 +66,24 @@ Then at last you can finally run your vm
 You need to create some files to share with your server VM
 
 
-* share
+===== share
 
 A directory containing generated promises for your nodes
 
 +$ mkdir -p /var/rudder/share+
 
-* inputs
+===== inputs
 
 A directory containing initial promises for Rudder server
 
 +$ mkdir -p /var/rudder/cfengine-community/inputs+
 
-and you should set its content by copying content of +${rudder-techniques}/initial-promises/node-server+
-from project rudder-techniques
+and you should set its content by copying content of +rudder-techniques/initial-promises/node-server+
+from project *rudder-techniques* (https://github.com/Normation/rudder-techniques)
 
 +$ cp -a /path/to/rudder-techniques/initial-promises/node-server/* /var/rudder/cfengine-community/inputs+
 
-* configuration-repository
+===== configuration-repository
 
 A repository containing Techniques/Directives/Groups for your server
 
@@ -114,11 +114,11 @@ but you have to launch your own rudder webapp.
 
 ==== Launching the webapp
 
-* Configuration File
+===== Configuration File
 
 We provide to you a configuration file fitted for that VM configuration (LDAP and PostgresSQL does not use the default ports)
 
-* launch option
+===== Launch options
 
 To launch Rudder webapp in Eclipse you should create a run configuration for rudder-web
 
@@ -137,14 +137,14 @@ Go to *http://localhost:8080/rudder-web/* to access it
 
 ==== FAQ
 
-===== My webapp can't start becaus eche can't read a file, what can I do ?
+===== My webapp can't start because it can't read a file, what can I do ?
 
 First you have to look if the corresponding file exists.
-If so, look if you own it or not.
+If so, it may be an authorization problem: look if you own it or not, with the accurate read/write rights. 
 Change the owner to yourself if not.
 
-===== I can't build a 64 bits virtual machines, how can i change to 32 bits one ?
+===== I can't build or use a 64 bits VM, how can I change to 32 bits one ?
 
-In file ${rudder-vagrant-devbox}/Vagrant/Vagrantfile, change  +config.vm.box = "debian-squeeze-64"+ to  +config.vm.box = "debian-squeeze-32"+
+In file +rudder-vagrant-devbox/Vagrant/Vagrantfile+, change  +config.vm.box = "debian-squeeze-64"+ to  +config.vm.box = "debian-squeeze-32"+
 and +config.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/Squeeze64.box"+ to +config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box"+
 
