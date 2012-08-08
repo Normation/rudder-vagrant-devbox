@@ -34,26 +34,6 @@ LDAPRESET="yes"
 INITPRORESET="yes"
 ALLOWEDNETWORK[0]='192.168.42.0/24'
 
-NODE1_IP="192.168.42.81"
-NODE1_HOSTNAME="node1"
-NODE1_IP="192.168.42.82"
-NODE1_HOSTNAME="node2"
-NODE1_IP="192.168.42.83"
-NODE1_HOSTNAME="node3"
-NODE1_IP="192.168.42.84"
-NODE1_HOSTNAME="node4"
-NODE1_IP="192.168.42.85"
-NODE1_HOSTNAME="node5"
-NODE1_IP="192.168.42.86"
-NODE1_HOSTNAME="node6"
-NODE1_IP="192.168.42.87"
-NODE1_HOSTNAME="node7"
-NODE1_IP="192.168.42.88"
-NODE1_HOSTNAME="node8"
-NODE1_IP="192.168.42.89"
-NODE1_HOSTNAME="node9"
-NODE1_IP="192.168.42.90"
-NODE1_HOSTNAME="node10"
 # Misc
 APTITUDE_ARGS="--assume-yes --allow-untrusted"
 
@@ -120,7 +100,17 @@ hostname server
 
 # node dns configuration
 # to add node, add line here
-echo -e "\n${NODE1_IP} ${NODE1_HOSTNAME}.rudder.local ${NODE1_HOSTNAME}" >> /etc/hosts
+echo -e "\n192.168.42.81	node1.rudder.local" >> /etc/hosts
+echo -e "\n192.168.42.82	node2.rudder.local" >> /etc/hosts
+echo -e "\n192.168.42.83	node3.rudder.local" >> /etc/hosts
+echo -e "\n192.168.42.84	node4.rudder.local" >> /etc/hosts
+echo -e "\n192.168.42.85	node5.rudder.local" >> /etc/hosts
+echo -e "\n192.168.42.86	node6.rudder.local" >> /etc/hosts
+echo -e "\n192.168.42.87	node7.rudder.local" >> /etc/hosts
+echo -e "\n192.168.42.88	node8.rudder.local" >> /etc/hosts
+echo -e "\n192.168.42.89	node9.rudder.local" >> /etc/hosts
+echo -e "\n192.168.42.90	node10.rudder.local" >> /etc/hosts
+
 
 echo '0,5,10,15,20,25,30,35,40,45,50,55 * * * * root if [ `ps -efww | grep cf-execd | grep "/var/rudder/cfengine-community/bin/cf-execd" | grep -v grep | wc -l` -eq 0 ]; then /var/rudder/cfengine-community/bin/cf-execd; fi' >> /etc/crontab
 
