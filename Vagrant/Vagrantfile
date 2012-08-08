@@ -66,8 +66,9 @@ Vagrant::Config.run do |config|
     server_config.vm.share_folder("rudder-var-configrepository", "/var/rudder/configuration-repository", "/var/rudder/configuration-repository", :create => true)
   end
 
-  config.vm.define :node do |node_config|
+  config.vm.define :node1 do |node_config|
     node_config.vm.network   :hostonly, "192.168.42.81"
+    node_config.vm.host_name = "node1"
     node_config.vm.provision :shell   , :path => "node.sh"
   end
 

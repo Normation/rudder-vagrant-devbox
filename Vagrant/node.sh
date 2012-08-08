@@ -27,8 +27,6 @@ KEY=474A19E8
 RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.4-nightly/"
 
 SERVER_IP="192.168.42.80"
-NODE_HOSTNAME="node1"
-NODE_IP="192.168.42.81"
 
 # Misc
 APTITUDE_ARGS="--assume-yes --allow-untrusted"
@@ -60,11 +58,7 @@ aptitude ${APTITUDE_ARGS} install debian-archive-keyring
 
 aptitude ${APTITUDE_ARGS} install rudder-agent
 
-sed -i "s%^127\.0\.1\.1.*%127\.0\.1\.1\t${NODE_HOSTNAME}\.rudder\.local\t${NODE_HOSTNAME}%" /etc/hosts
-
-echo "${NODE_HOSTNAME}" > /etc/hostname
-
-hostname ${NODE_HOSTNAME}
+sed -i ""s%^127\.0\.1\.1.*%127\.0\.1\.1\\t$(cat /etc/hostname)\.rudder\.local\\t$(cat /etc/hostname)%"" /etc/hosts
 
 echo -e "\n${SERVER_IP}	server.rudder.local" >> /etc/hosts
 
