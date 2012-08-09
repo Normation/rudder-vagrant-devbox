@@ -77,6 +77,10 @@ echo "host    all         all         10.0.0.0/16       trust" >> /etc/postgresq
 
 sed -i s%^base\.url\=.*%base\.url\=http\:\/\/localhost\:8080\/rudder% /opt/rudder/etc/rudder-web.properties
 
+#copy a fake licence file to make rudder happy
+mkdir -p /opt/rudder/etc/licenses/
+cp /vagrant/licences.xml /opt/rudder/etc/licenses/
+
 #we don't want to launch the Rudder Web app, only the endpoint
 #so we replace the real Rudder with our fake one, available on share file
 #we also have to adapt JVM memory to conform to what the VM has
