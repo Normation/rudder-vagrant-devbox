@@ -73,7 +73,7 @@ echo "host    all         all         10.0.0.0/16       trust" >> /etc/postgresq
 /etc/init.d/postgresql restart
 
 # Initialize Rudder
-/opt/rudder/bin/rudder-init.sh $SERVER_INSTANCE_HOST $DEMOSAMPLE $LDAPRESET $INITPRORESET ${ALLOWEDNETWORK[0]}
+/opt/rudder/bin/rudder-init.sh "server.rudder.local" $SERVER_INSTANCE_HOST $DEMOSAMPLE $LDAPRESET $INITPRORESET ${ALLOWEDNETWORK[0]}
 
 sed -i s%^base\.url\=.*%base\.url\=http\:\/\/localhost\:8080\/rudder% /opt/rudder/etc/rudder-web.properties
 
