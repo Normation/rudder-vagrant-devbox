@@ -62,7 +62,7 @@ echo "deb ${RUDDER_REPO_URL} $(lsb_release -cs) main contrib non-free" > /etc/ap
 aptitude update
 
 #Packages minimum
-aptitude ${APTITUDE_ARGS} install debian-archive-keyring vim zsh nfs-common
+aptitude ${APTITUDE_ARGS} install debian-archive-keyring vim tree zsh nfs-common
 aptitude ${APTITUDE_ARGS} install rudder-server-root
 
 # Allow all connections to LDAP and PostgreSQL
