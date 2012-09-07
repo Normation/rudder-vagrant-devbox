@@ -71,5 +71,19 @@ Vagrant::Config.run do |config|
     node_config.vm.host_name = "node1"
     node_config.vm.provision :shell   , :path => "node.sh"
   end
-
+  config.vm.define :node2 do |node_config|
+    node_config.vm.network   :hostonly, "192.168.42.82"
+    node_config.vm.host_name = "node2"
+    node_config.vm.provision :shell   , :path => "node.sh"
+  end
+  config.vm.define :node3 do |node_config|
+    node_config.vm.network   :hostonly, "192.168.42.83"
+    node_config.vm.host_name = "node3"
+    node_config.vm.provision :shell   , :path => "node.sh"
+  end
+  config.vm.define :node4 do |node_config|
+    node_config.vm.network   :hostonly, "192.168.42.84"
+    node_config.vm.host_name = "node4"
+    node_config.vm.provision :shell   , :path => "node.sh"
+  end
 end
