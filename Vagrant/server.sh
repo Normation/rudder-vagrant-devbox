@@ -24,7 +24,7 @@
 # Fetch parameters
 KEYSERVER=keyserver.ubuntu.com
 KEY=474A19E8
-RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.5-nightly/"
+RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.6-nightly/"
 
 # Rudder related parameters
 # use the same IP than in Vagrantfile
