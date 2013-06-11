@@ -54,7 +54,6 @@ Vagrant::Config.run do |config|
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
 
   config.vm.define :rudder do |server_config|
-    # server_config.vm.box = "debian-squeeze-32"
     server_config.vm.customize ["modifyvm", :id, "--memory", "512"]
     server_config.vm.forward_port  80, 8880
     server_config.vm.forward_port  389, 1389
