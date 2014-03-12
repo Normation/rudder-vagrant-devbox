@@ -20,16 +20,17 @@
 # set -ex
 
 ## Config stage
+export DEBIAN_FRONTEND=noninteractive
 
 # Fetch parameters
 KEYSERVER=keyserver.ubuntu.com
 KEY=474A19E8
-RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.5-nightly/"
+RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.6-nightly/"
 
 SERVER_IP="192.168.42.80"
 
 # Misc
-APTITUDE_ARGS="--assume-yes --allow-untrusted"
+APTITUDE_ARGS="--assume-yes"
 
 
 # Showtime
