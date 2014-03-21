@@ -25,7 +25,7 @@ export DEBIAN_FRONTEND=noninteractive
 # Fetch parameters
 KEYSERVER=keyserver.ubuntu.com
 KEY=474A19E8
-RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.9-nightly/"
+RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.10/"
 
 # Rudder related parameters
 # use the same IP than in Vagrantfile
@@ -67,7 +67,7 @@ aptitude ${APTITUDE_ARGS} install debian-archive-keyring vim tree zsh nfs-common
 aptitude ${APTITUDE_ARGS} install rudder-server-root
 
 # Allow all connections to LDAP and PostgreSQL
-sed -i "s/^IP=.*$/IP=*/" /etc/default/slapd
+sed -i "s/^IP=.*$/IP=*/" /etc/default/rudder-slapd
 echo "listen_addresses = '*'" >> /etc/postgresql/8.4/main/postgresql.conf
 echo "host    all         all         192.168.42.0/24       trust" >> /etc/postgresql/8.4/main/pg_hba.conf
 echo "host    all         all         10.0.0.0/16       trust" >> /etc/postgresql/8.4/main/pg_hba.conf
@@ -81,13 +81,13 @@ sed -i s%^base\.url\=.*%base\.url\=http\:\/\/localhost\:8080\/rudder% /opt/rudde
 #we don't want to launch the Rudder Web app, only the endpoint
 #so we replace the real Rudder with our fake one, available on share file
 #we also have to adapt JVM memory to conform to what the VM has
-/etc/init.d/jetty stop
-sed -i -e "s/JAVA_XMX=1024/JAVA_XMX=350/" /etc/default/jetty
-sed -i -e "s/JAVA_MAXPERMSIZE=256/JAVA_MAXPERMSIZE=70/" /etc/default/jetty
-sed -i -e "s/-XX:PermSize=128m/-XX:PermSize=70m/" /etc/default/jetty
+/etc/init.d/rudder-jetty stop
+sed -i -e "s/JAVA_XMX=1024/JAVA_XMX=350/" /etc/default/rudder-jetty
+sed -i -e "s/JAVA_MAXPERMSIZE=256/JAVA_MAXPERMSIZE=70/" /etc/default/rudder-jetty
+sed -i -e "s/-XX:PermSize=128m/-XX:PermSize=70m/" /etc/default/rudder-jetty
 rm /opt/rudder/jetty7/webapps/rudder.war 
 cp /vagrant/fakeRudder/fake-rudder-web-2.4.0-SNAPSHOT.war /opt/rudder/jetty7/webapps/rudder.war
-/etc/init.d/jetty start
+/etc/init.d/rudder-jetty start
 
 #we want to make sure that people don't look for the bad 
 #configuration-repository - the one used is on the host
