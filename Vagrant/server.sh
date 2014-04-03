@@ -25,7 +25,7 @@ export DEBIAN_FRONTEND=noninteractive
 # Fetch parameters
 KEYSERVER=keyserver.ubuntu.com
 KEY=474A19E8
-RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.8-nightly/"
+RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.9-nightly/"
 
 # Rudder related parameters
 # use the same IP than in Vagrantfile
@@ -81,9 +81,10 @@ sed -i s%^base\.url\=.*%base\.url\=http\:\/\/localhost\:8080\/rudder% /opt/rudde
 #we don't want to launch the Rudder Web app, only the endpoint
 #so we replace the real Rudder with our fake one, available on share file
 #we also have to adapt JVM memory to conform to what the VM has
-/etc/init.d/jetty stop 
-sed -i -e "s/-Xms1024m -Xmx1024m/-Xms350m -Xmx350m/" /etc/default/jetty
-sed -i -e "s/-XX:PermSize=128m -XX:MaxPermSize=256m/-XX:PermSize=70m -XX:MaxPermSize=70m/" /etc/default/jetty
+/etc/init.d/jetty stop
+sed -i -e "s/JAVA_XMX=1024/JAVA_XMX=350/" /etc/default/jetty
+sed -i -e "s/JAVA_MAXPERMSIZE=256/JAVA_MAXPERMSIZE=70/" /etc/default/jetty
+sed -i -e "s/-XX:PermSize=128m/-XX:PermSize=70m/" /etc/default/jetty
 rm /opt/rudder/jetty7/webapps/rudder.war 
 cp /vagrant/fakeRudder/fake-rudder-web-2.4.0-SNAPSHOT.war /opt/rudder/jetty7/webapps/rudder.war
 /etc/init.d/jetty start
