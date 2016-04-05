@@ -25,7 +25,7 @@ export DEBIAN_FRONTEND=noninteractive
 # Fetch parameters
 KEYSERVER=keyserver.ubuntu.com
 KEY=474A19E8
-RUDDER_REPO_URL="http://www.rudder-project.org/apt-2.10/"
+RUDDER_REPO_URL="http://www.rudder-project.org/apt-3.2/"
 
 # Rudder related parameters
 # use the same IP than in Vagrantfile
@@ -43,7 +43,7 @@ APTITUDE_ARGS="--assume-yes"
 # destroy the very fabric of our reality and maybe hurt kittens.
 # Be responsible, please think of the kittens.
 
-aptitude update && aptitude ${APTITUDE_ARGS} install lsb-release
+apt-get update && apt-get ${APTITUDE_ARGS} install lsb-release
 
 ##Accept Java Licence
 echo sun-java6-jre shared/accepted-sun-dlj-v1-1 select true | /usr/bin/debconf-set-selections
@@ -60,17 +60,17 @@ echo "deb-src http://ftp.fr.debian.org/debian/ $(lsb_release -cs)-updates main" 
 
 echo "deb ${RUDDER_REPO_URL} $(lsb_release -cs) main contrib non-free" > /etc/apt/sources.list.d/rudder.list
 
-aptitude update
+apt-get update
 
 #Packages minimum
-aptitude ${APTITUDE_ARGS} install debian-archive-keyring vim tree zsh nfs-common
-aptitude ${APTITUDE_ARGS} install rudder-server-root
+apt-get ${APTITUDE_ARGS} install debian-archive-keyring vim tree zsh nfs-common
+apt-get ${APTITUDE_ARGS} install rudder-server-root
 
 # Allow all connections to LDAP and PostgreSQL
 sed -i "s/^IP=.*$/IP=*/" /etc/default/rudder-slapd
-echo "listen_addresses = '*'" >> /etc/postgresql/8.4/main/postgresql.conf
-echo "host    all         all         192.168.42.0/24       trust" >> /etc/postgresql/8.4/main/pg_hba.conf
-echo "host    all         all         10.0.0.0/16       trust" >> /etc/postgresql/8.4/main/pg_hba.conf
+echo "listen_addresses = '*'" >> /etc/postgresql/9.4/main/postgresql.conf
+echo "host    all         all         192.168.42.0/24       trust" >> /etc/postgresql/9.4/main/pg_hba.conf
+echo "host    all         all         10.0.0.0/16       trust" >> /etc/postgresql/9.4/main/pg_hba.conf
 /etc/init.d/postgresql restart
 
 # Initialize Rudder
